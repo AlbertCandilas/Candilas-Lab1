@@ -1,0 +1,118 @@
+/* Modern Reset & Base Styles */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Inter', -apple-system, sans-serif;
+    background-color: #f4f7fe; /* Light blue-grey background */
+    color: #2d3748;
+    padding: 40px;
+    line-height: 1.6;
+}
+
+h2 {
+    margin-bottom: 24px;
+    font-size: 1.8rem;
+    color: #1a202c;
+}
+
+/* Navigation Bar Styling */
+div[style*="display:flex"] {
+    background: #ffffff;
+    padding: 15px 25px !important;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    margin-bottom: 30px !important;
+    border: 1px solid #e2e8f0;
+}
+
+div[style*="display:flex"] a {
+    text-decoration: none;
+    color: #4a5568;
+    font-weight: 600;
+    font-size: 0.95rem;
+    padding: 8px 16px;
+    border-radius: 8px;
+    transition: all 0.2s ease;
+}
+
+div[style*="display:flex"] a:hover {
+    background-color: #edf2ff;
+    color: #4c51bf;
+}
+
+hr {
+    display: none; /* Hide the old horizontal line */
+}
+
+/* Transforming the <ul> into a Dashboard Grid */
+ul {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 20px;
+    list-style: none;
+    margin-bottom: 40px;
+}
+
+ul li {
+    background: #ffffff;
+    padding: 25px;
+    border-radius: 16px;
+    border: 1px solid #e2e8f0;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.2s;
+}
+
+ul li:hover {
+    transform: translateY(-5px);
+}
+
+/* Targeting the labels vs the numbers */
+ul li b {
+    font-size: 2rem;
+    color: #4c51bf; /* Indigo accent */
+    margin-top: 5px;
+}
+
+/* Adding "Context" text before the numbers via CSS */
+ul li:nth-child(1)::before { content: "Total Clients"; font-size: 0.85rem; color: #718096; text-transform: uppercase; }
+ul li:nth-child(2)::before { content: "Total Services"; font-size: 0.85rem; color: #718096; text-transform: uppercase; }
+ul li:nth-child(3)::before { content: "Total Bookings"; font-size: 0.85rem; color: #718096; text-transform: uppercase; }
+ul li:nth-child(4)::before { content: "Revenue Generated"; font-size: 0.85rem; color: #718096; text-transform: uppercase; }
+
+/* Hide the duplicate text inside the <li> so only <b> shows */
+ul li {
+    font-size: 0; /* Hides the "Total Clients:" text string */
+}
+ul li b {
+    font-size: 2rem; /* Brings back the number size */
+}
+
+/* Quick Links Styling */
+p {
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 12px;
+    border-left: 5px solid #4c51bf;
+}
+
+p a {
+    display: inline-block;
+    background: #4c51bf;
+    color: white !important;
+    padding: 10px 20px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: bold;
+    margin: 5px;
+    font-size: 0.9rem;
+}
+
+p a:hover {
+    background: #3c366b;
+}
