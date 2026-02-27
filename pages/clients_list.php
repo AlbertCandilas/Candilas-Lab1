@@ -1,36 +1,42 @@
 <?php
 include "../db.php";
+// Fetch all clients, newest first
+$result = mysqli_query($conn, "SELECT * FROM clients ORDER BY client_id DESC");
 ?>
 <!doctype html>
 <html>
 <head>
-    <title>Client List</title>
+    <meta charset="utf-8">
+    <title>Clients List</title>
     <link rel="stylesheet" href="../style.css">
 </head>
 <body>
-    <?php include "../nav.php"; ?>
-    <h2>Clients</h2>
-    <div class="stat-card"> <table width="100%" border="0" style="border-collapse: collapse;">
-            <thead>
-                <tr style="text-align: left; color: #94a3b8; border-bottom: 1px solid #eee;">
-                    <th style="padding: 10px;">ID</th>
-                    <th>Name</th>
-                    <th>Email</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php
-                $res = mysqli_query($conn, "SELECT * FROM clients");
-                while($row = mysqli_fetch_assoc($res)) {
-                    echo "<tr style='border-bottom: 1px solid #f8fafc;'>
-                            <td style='padding: 15px;'>{$row['id']}</td>
-                            <td>{$row['name']}</td>
-                            <td>{$row['email']}</td>
-                          </tr>";
-                }
-                ?>
-            </tbody>
-        </table>
-    </div>
+<?php include "../nav.php"; ?>
+ 
+<h2>Clients</h2>
+<p><a href="clients_add.php" style="background:#4c51bf; color:white; padding:8px; border-radius:5px; text-decoration:none;">+ Add New Client</a></p>
+ 
+<table border="1" cellpadding="10" style="width:100%; border-collapse: collapse; margin-top:20px;">
+  <tr style="background-color: #eee;">
+    <th>ID</th>
+    <th>Name</th>
+    <th>Email</th>
+    <th>Phone</th>
+    <th>Address</th>
+    <th>Action</th>
+  </tr>
+  <?php while($row = mysqli_fetch_assoc($result)) { ?>
+    <tr>
+      <td><?php echo $row['client_id']; ?></td>
+      <td><?php echo htmlspecialchars($row['full_name']); ?></td>
+      <td><?php echo htmlspecialchars($row['email']); ?></td>
+      <td><?php echo htmlspecialchars($row['phone']); ?></td>
+      <td><?php echo htmlspecialchars($row['address']); ?></td>
+      <td>
+        <a href="clients_edit.php?id=<?php echo $row['client_id']; ?>">Edit</a>
+      </td>
+    </tr>
+  <?php } ?>
+</table>
 </body>
 </html>

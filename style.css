@@ -1,4 +1,16 @@
-/* Modern Reset & Base Styles */
+/* --- 1. Theme Variables --- */
+:root {
+    --bg-color: #f4f7fe;
+    --card-bg: #ffffff;
+    --text-main: #2d3748;
+    --text-muted: #718096;
+    --nav-text: #4a5568;
+    --border-color: #e2e8f0;
+    --accent: #4c51bf;
+    --shadow: rgba(0, 0, 0, 0.05);
+}
+
+/* --- 2. Modern Reset & Base --- */
 * {
     box-sizing: border-box;
     margin: 0;
@@ -7,112 +19,226 @@
 
 body {
     font-family: 'Inter', -apple-system, sans-serif;
-    background-color: #f4f7fe; /* Light blue-grey background */
-    color: #2d3748;
-    padding: 40px;
-    line-height: 1.6;
+    background-color: var(--bg-color);
+    color: var(--text-main);
+    padding: 20px;
+    line-height: 1.4;
 }
 
 h2 {
-    margin-bottom: 24px;
-    font-size: 1.8rem;
-    color: #1a202c;
+    margin-bottom: 15px;
+    font-size: 1.4rem;
+    color: var(--text-main);
 }
 
-/* Navigation Bar Styling */
+/* --- 3. Compact Navigation --- */
 div[style*="display:flex"] {
-    background: #ffffff;
-    padding: 15px 25px !important;
-    border-radius: 12px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-    margin-bottom: 30px !important;
-    border: 1px solid #e2e8f0;
+    background: var(--card-bg);
+    padding: 8px 15px !important;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px var(--shadow);
+    margin-bottom: 20px !important;
+    border: 1px solid var(--border-color);
 }
 
 div[style*="display:flex"] a {
     text-decoration: none;
-    color: #4a5568;
+    color: var(--nav-text);
     font-weight: 600;
-    font-size: 0.95rem;
-    padding: 8px 16px;
-    border-radius: 8px;
-    transition: all 0.2s ease;
+    font-size: 0.85rem;
+    padding: 6px 12px;
+    border-radius: 6px;
+    transition: all 0.25s ease;
+    display: inline-block;
 }
 
 div[style*="display:flex"] a:hover {
-    background-color: #edf2ff;
-    color: #4c51bf;
+    background-color: var(--bg-color);
+    color: var(--accent);
+    transform: translateY(-2px);
 }
 
-hr {
-    display: none; /* Hide the old horizontal line */
-}
+hr { display: none; }
 
-/* Transforming the <ul> into a Dashboard Grid */
+/* --- 4. Dashboard Grid (Interactive Moving Boxes) --- */
 ul {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 20px;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 15px;
     list-style: none;
-    margin-bottom: 40px;
+    margin-bottom: 30px;
 }
 
 ul li {
-    background: #ffffff;
-    padding: 25px;
-    border-radius: 16px;
-    border: 1px solid #e2e8f0;
-    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    background: var(--card-bg);
+    padding: 15px;
+    border-radius: 10px;
+    border: 1px solid var(--border-color);
+    box-shadow: 0 4px 6px -1px var(--shadow);
     display: flex;
     flex-direction: column;
-    transition: transform 0.2s;
+    font-size: 0;
+    transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.25s ease;
 }
 
 ul li:hover {
-    transform: translateY(-5px);
+    transform: translateY(-8px); 
+    box-shadow: 0 10px 20px var(--shadow);
+    border-color: var(--accent);
 }
 
-/* Targeting the labels vs the numbers */
 ul li b {
-    font-size: 2rem;
-    color: #4c51bf; /* Indigo accent */
+    font-size: 1.5rem;
+    color: var(--accent);
     margin-top: 5px;
+    display: block;
 }
 
-/* Adding "Context" text before the numbers via CSS */
-ul li:nth-child(1)::before { content: "Total Clients"; font-size: 0.85rem; color: #718096; text-transform: uppercase; }
-ul li:nth-child(2)::before { content: "Total Services"; font-size: 0.85rem; color: #718096; text-transform: uppercase; }
-ul li:nth-child(3)::before { content: "Total Bookings"; font-size: 0.85rem; color: #718096; text-transform: uppercase; }
-ul li:nth-child(4)::before { content: "Revenue Generated"; font-size: 0.85rem; color: #718096; text-transform: uppercase; }
-
-/* Hide the duplicate text inside the <li> so only <b> shows */
-ul li {
-    font-size: 0; /* Hides the "Total Clients:" text string */
-}
-ul li b {
-    font-size: 2rem; /* Brings back the number size */
+ul li::before { 
+    font-size: 0.7rem;
+    color: var(--text-muted); 
+    text-transform: uppercase; 
+    font-weight: 700;
 }
 
-/* Quick Links Styling */
-p {
-    background: #ffffff;
+ul li:nth-child(1)::before { content: "Total Clients"; }
+ul li:nth-child(2)::before { content: "Total Services"; }
+ul li:nth-child(3)::before { content: "Total Bookings"; }
+ul li:nth-child(4)::before { content: "Revenue"; }
+
+/* --- 5. Compact Forms & Interactive Buttons --- */
+form {
+    max-width: 400px;
+    background: var(--card-bg);
     padding: 20px;
-    border-radius: 12px;
-    border-left: 5px solid #4c51bf;
+    border-radius: 10px;
+    border: 1px solid var(--border-color);
+    box-shadow: 0 2px 4px var(--shadow);
 }
+
+input, textarea, select {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 12px;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    background: var(--bg-color);
+    color: var(--text-main);
+    transition: border-color 0.2s;
+}
+
+input:focus { border-color: var(--accent); outline: none; }
+
+button[type="submit"], .btn-primary {
+    background: var(--accent);
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 6px;
+    font-weight: 600;
+    cursor: pointer;
+    width: 100%;
+    transition: transform 0.2s ease, opacity 0.2s;
+}
+
+button:hover { 
+    opacity: 0.9;
+    transform: scale(1.02);
+}
+
+/* --- 6. Modern Table Styling (Interactive Rows) --- */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background: var(--card-bg);
+    border-radius: 8px;
+    overflow: hidden;
+    margin-top: 15px;
+    border: 1px solid var(--border-color);
+}
+
+th {
+    background-color: var(--bg-color);
+    color: var(--text-muted);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid var(--border-color);
+}
+
+td {
+    padding: 10px;
+    border-bottom: 1px solid var(--border-color);
+    font-size: 0.85rem;
+    color: var(--text-main);
+}
+
+tr { transition: transform 0.2s ease, background 0.2s ease; }
+
+tr:hover { 
+    background-color: var(--bg-color); 
+    transform: translateX(5px); 
+}
+
+/* --- 7. Quick Links (Animated) --- */
+p {
+    background: var(--card-bg);
+    padding: 12px;
+    border-radius: 8px;
+    border-left: 4px solid var(--accent);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.85rem;
+    transition: transform 0.3s ease;
+}
+
+p:hover { transform: translateX(3px); }
 
 p a {
-    display: inline-block;
-    background: #4c51bf;
+    background: var(--accent);
     color: white !important;
-    padding: 10px 20px;
-    border-radius: 6px;
+    padding: 6px 14px;
+    border-radius: 5px;
     text-decoration: none;
-    font-weight: bold;
-    margin: 5px;
-    font-size: 0.9rem;
+    font-weight: 600;
+    transition: transform 0.2s;
 }
 
-p a:hover {
-    background: #3c366b;
+p a:hover { transform: scale(1.05); }
+
+/* --- 8. Centered Login Layout --- */
+.login-body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: var(--bg-color);
+    margin: 0;
+    padding: 0;
+}
+
+.login-wrapper {
+    width: 100%;
+    max-width: 400px;
+    padding: 20px;
+}
+
+.login-wrapper form {
+    max-width: 100% !important;
+    padding: 40px !important;
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.login-wrapper form:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+}
+
+.login-wrapper h2 {
+    margin-bottom: 25px;
+    color: var(--accent);
+    font-size: 1.8rem;
 }

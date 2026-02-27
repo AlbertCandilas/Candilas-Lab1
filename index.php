@@ -1,4 +1,13 @@
 <?php
+session_start();
+
+// 1. SECURITY CHECK: If not logged in, redirect to login
+if (!isset($_SESSION['username'])) {
+    header("Location: login.php");
+    exit();
+}
+
+// 2. DATABASE LOGIC
 include "db.php";
  
 $clients = mysqli_fetch_assoc(mysqli_query($conn, "SELECT COUNT(*) AS c FROM clients"))['c'];
@@ -19,6 +28,10 @@ $revenue = $revRow['s'];
 <?php include "nav.php"; ?>
  
 <h2>Dashboard</h2>
+
+<h3 style="color: var(--text-muted); margin-bottom: 20px;">
+    Welcome, <?php echo htmlspecialchars($_SESSION['username']); ?>!
+</h3>
  
 <ul>
   <li>Total Clients: <b><?php echo $clients; ?></b></li>
